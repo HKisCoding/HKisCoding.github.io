@@ -9,9 +9,8 @@ categories: [paper, self-supervised, Sequence2Sequence, OCR, ContrastiveLearning
 - **Cite Key**:: [@aberdamSequencetoSequenceContrastiveLearning2020]
 
 ### Abstract
-```
-We propose a framework for sequence-to-sequence contrastive learning (SeqCLR) of visual representations, which we apply to text recognition. To account for the sequence-to-sequence structure, each feature map is divided into different instances over which the contrastive loss is computed. This operation enables us to contrast in a sub-word level, where from each image we extract several positive pairs and multiple negative examples. To yield effective visual representations for text recognition, we further suggest novel augmentation heuristics, different encoder architectures and custom projection heads. Experiments on handwritten text and on scene text show that when a text decoder is trained on the learned representations, our method outperforms non-sequential contrastive methods. In addition, when the amount of supervision is reduced, SeqCLR significantly improves performance compared with supervised training, and when fine-tuned with 100% of the labels, our method achieves state-of-the-art results on standard handwritten text recognition benchmarks.
-```
+>We propose a framework for sequence-to-sequence contrastive learning (SeqCLR) of visual representations, which we apply to text recognition. To account for the sequence-to-sequence structure, each feature map is divided into different instances over which the contrastive loss is computed. This operation enables us to contrast in a sub-word level, where from each image we extract several positive pairs and multiple negative examples. To yield effective visual representations for text recognition, we further suggest novel augmentation heuristics, different encoder architectures and custom projection heads. Experiments on handwritten text and on scene text show that when a text decoder is trained on the learned representations, our method outperforms non-sequential contrastive methods. In addition, when the amount of supervision is reduced, SeqCLR significantly improves performance compared with supervised training, and when fine-tuned with 100% of the labels, our method achieves state-of-the-art results on standard handwritten text recognition benchmarks.
+
 
 ### Notes
 
@@ -26,29 +25,29 @@ The key contributions of our work are:
 - Extensive experimental validation showing state-ofthe-art performance on handwritten text.
 
 <p align="center">
-  <img src="/Users/khoi.vo/Documents/hkiscoding.github.io/images/papers/Pasted-image-20221212112220.png" alt="Model architecture"/>
+  <img src="/images/papers/Pasted-image-20221212112220.png" alt="Model architecture"/>
   Architecture of model 
 </p>
 
 <p align="center">
-  <img src="/Users/khoi.vo/Documents/hkiscoding.github.io/images/papers/Pasted-image-20221212112339.png" alt="Model architecture"/></br>
+  <img src="/images/papers/Pasted-image-20221212112339.png" alt="Model architecture"/></br>
   3 ways to map the output
 </p>
 
 **Contrastive loss**:
-$$
+<div>
 \begin{equation}
 \begin{aligned}
 \mathcal{L}\left(\mathcal{Z}^a, \mathcal{Z}^b\right) & =\sum_{r \in\left|\mathcal{Z}^a\right|} \ell_{\mathrm{NCE}}\left(\mathbf{z}_r^a, \mathbf{z}_r^b ; \mathcal{Z}^a \cup \mathcal{Z}^b\right) \\
 & +\sum_{r \in\left|\mathcal{Z}^b\right|} \ell_{\mathrm{NCE}}\left(\mathbf{z}_r^b, \mathbf{z}_r^a ; \mathcal{Z}^a \cup \mathcal{Z}^b\right),
 \end{aligned}
 \end{equation}
-$$
-$$
+</div>
+<div>
 \begin{equation}
 \ell_{\mathrm{NCE}}\left(\mathbf{u}^a, \mathbf{u}^b ; \mathcal{U}\right)=-\log \frac{\exp \left(\operatorname{sim}\left(\mathbf{u}^a, \mathbf{u}^b\right) / \tau\right)}{\sum_{\mathbf{u} \in \mathcal{U} \backslash \mathbf{u}^a} \exp \left(\operatorname{sim}\left(\mathbf{u}^a, \mathbf{u}\right) / \tau\right)}
 \end{equation}
-$$
+</div>
 **Base Encoder**: Consider two candidates as the sequential representations $\mathbf{R}_i \in \mathbb{R}^{F \times T_i}$:
 - The visual features: $\mathbf{R}_i = \mathbf{V}_i$
 - The contextual feature map: $\mathbf{R}_i = \mathbf{H}_i$.
@@ -68,7 +67,6 @@ $$
 
 **Result** 
 <p align="center">
-  <img src="/Users/khoi.vo/Documents/hkiscoding.github.io/images/papers/Pasted image 20221212134318.png" alt="Model architecture"/></br>
+  <img src="/images/papers/Pasted image 20221212134318.png" alt="Model architecture"/></br>
   Model results compare with others
 </p>
-
