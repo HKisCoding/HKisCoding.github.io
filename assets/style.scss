@@ -375,13 +375,20 @@ nav {
 
 .post {
   blockquote {
-    margin: 1.8em .8em;
-    /*border-left: 2px solid $gray;*/
-    padding: 0.1em 1em;
+    // margin: 1.8em .8em;
+    // /*border-left: 2px solid $gray;*/
+    // padding: 0.1em 1em;
+    // color: $gray;
+    // font-size: 22px;
+    // font-style: italic;
+    // background-color: #ede1ff;
+    margin: 0 2px 40px;
+    border: 1px solid rgb(238, 238, 238);
+    background: rgb(245, 245, 245);
+    border-radius: 8px;
+    padding: 0.4em;
+    font-size: 18px;
     color: $gray;
-    font-size: 22px;
-    font-style: italic;
-    background-color: #ede1ff;
   }
 
   .you-may-like{
