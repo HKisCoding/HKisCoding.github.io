@@ -3,7 +3,7 @@ layout: post
 title: Sequence-to-Sequence Contrastive Learning for Text Recognition
 categories: [paper, self-supervised, Sequence2Sequence, OCR, ContrastiveLearning]
 ---
-- **PublishYear**:: 2020 
+- **PublishYear**:: 2020
 - **Author**:: Aviad Aberdam, Ron Litman, Shahar Tsiper, Oron Anschel, Ron Slossberg, Shai Mazor, R. Manmatha, Pietro Perona
 - **Link**:: http://arxiv.org/abs/2012.10873
 - **Cite Key**:: [@aberdamSequencetoSequenceContrastiveLearning2020]
