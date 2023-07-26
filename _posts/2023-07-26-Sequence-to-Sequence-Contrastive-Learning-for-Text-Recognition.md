@@ -35,19 +35,19 @@ The key contributions of our work are:
 </p>
 
 **Contrastive loss**:
-<div>
+$$
 \begin{equation}
 \begin{aligned}
 \mathcal{L}\left(\mathcal{Z}^a, \mathcal{Z}^b\right) & =\sum_{r \in\left|\mathcal{Z}^a\right|} \ell_{\mathrm{NCE}}\left(\mathbf{z}_r^a, \mathbf{z}_r^b ; \mathcal{Z}^a \cup \mathcal{Z}^b\right) \\
 & +\sum_{r \in\left|\mathcal{Z}^b\right|} \ell_{\mathrm{NCE}}\left(\mathbf{z}_r^b, \mathbf{z}_r^a ; \mathcal{Z}^a \cup \mathcal{Z}^b\right),
 \end{aligned}
 \end{equation}
-</div>
-<div>
+$$
+$$
 \begin{equation}
 \ell_{\mathrm{NCE}}\left(\mathbf{u}^a, \mathbf{u}^b ; \mathcal{U}\right)=-\log \frac{\exp \left(\operatorname{sim}\left(\mathbf{u}^a, \mathbf{u}^b\right) / \tau\right)}{\sum_{\mathbf{u} \in \mathcal{U} \backslash \mathbf{u}^a} \exp \left(\operatorname{sim}\left(\mathbf{u}^a, \mathbf{u}\right) / \tau\right)}
 \end{equation}
-</div>
+$$
 **Base Encoder**: Consider two candidates as the sequential representations $\mathbf{R}_i \in \mathbb{R}^{F \times T_i}$:
 - The visual features: $\mathbf{R}_i = \mathbf{V}_i$
 - The contextual feature map: $\mathbf{R}_i = \mathbf{H}_i$.
