@@ -25,9 +25,15 @@ The key contributions of our work are:
 - Defining sequence preserving augmentation procedures, and custom projection heads. 
 - Extensive experimental validation showing state-ofthe-art performance on handwritten text.
 
-![](images/papers/Pasted-image-20221212112220.png)
+<p align="center">
+  <img src="/Users/khoi.vo/Documents/hkiscoding.github.io/images/papers/Pasted-image-20221212112220.png" alt="Model architecture"/>
+  Architecture of model 
+</p>
 
-![](images/mobile-demo.png)
+<p align="center">
+  <img src="/Users/khoi.vo/Documents/hkiscoding.github.io/images/papers/Pasted-image-20221212112339.png" alt="Model architecture"/></br>
+  3 ways to map the output
+</p>
 
 **Contrastive loss**:
 $$
@@ -44,23 +50,25 @@ $$
 \end{equation}
 $$
 **Base Encoder**: Consider two candidates as the sequential representations $\mathbf{R}_i \in \mathbb{R}^{F \times T_i}$:
-	- The visual features: $\mathbf{R}_i = \mathbf{V}_i$
-	- The contextual feature map: $\mathbf{R}_i = \mathbf{H}_i$ 
-**Projection head**: Small auxiliary neural network discarded after pretrain stage: MLP projection and BiLSTM projection.
-**Instance-mapping**: 
-	- All to instance: All frames avraged to single instance $m(\mathbf(P)) = AVG(\mathbf(P))$ -> reduce the number of negative in each batches -> deteriorate the equality of the learned representation.
-	- Window to Instance: Adaptive average pooling to $T'$ instances. -> represent the trade-off between mis-alignment robustness and sample efficiency.
-	- Frame to Instance: Each frame define as seperate instance.
+- The visual features: $\mathbf{R}_i = \mathbf{V}_i$
+- The contextual feature map: $\mathbf{R}_i = \mathbf{H}_i$.
 
-**Augmentation**: the augmentation pipeline consists of 
-	- linear contrasting, 
-	- blurring, sharpening, 
-	- horizontal cropping 
-	- light affine transformations
+**Projection head**: Small auxiliary neural network discarded after pretrain stage: MLP projection and BiLSTM projection.
+
+**Instance-mapping**: 
+- All to instance: All frames avraged to single instance $m(\mathbf(P)) = AVG(\mathbf(P))$ -> reduce the number of negative in each batches -> deteriorate the equality of the learned representation.
+- Window to Instance: Adaptive average pooling to $T'$ instances. -> represent the trade-off between mis-alignment robustness and sample efficiency.
+- Frame to Instance: Each frame define as seperate instance.
+
+**Augmentation**: the augmentation pipeline consists of
+- linear contrasting, 
+- blurring, sharpening, 
+- horizontal cropping 
+- light affine transformations
 
 **Result** 
-![[Pasted image 20221212134318.png]]
-
-
----
+<p align="center">
+  <img src="/Users/khoi.vo/Documents/hkiscoding.github.io/images/papers/Pasted image 20221212134318.png" alt="Model architecture"/></br>
+  Model results compare with others
+</p>
 
