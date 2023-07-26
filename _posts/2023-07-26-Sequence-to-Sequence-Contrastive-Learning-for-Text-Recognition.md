@@ -35,6 +35,7 @@ The key contributions of our work are:
 </p>
 
 **Contrastive loss**:
+
 $$
 \begin{equation}
 \begin{aligned}
@@ -43,11 +44,13 @@ $$
 \end{aligned}
 \end{equation}
 $$
+
 $$
 \begin{equation}
 \ell_{\mathrm{NCE}}\left(\mathbf{u}^a, \mathbf{u}^b ; \mathcal{U}\right)=-\log \frac{\exp \left(\operatorname{sim}\left(\mathbf{u}^a, \mathbf{u}^b\right) / \tau\right)}{\sum_{\mathbf{u} \in \mathcal{U} \backslash \mathbf{u}^a} \exp \left(\operatorname{sim}\left(\mathbf{u}^a, \mathbf{u}\right) / \tau\right)}
 \end{equation}
 $$
+
 **Base Encoder**: Consider two candidates as the sequential representations $\mathbf{R}_i \in \mathbb{R}^{F \times T_i}$:
 - The visual features: $\mathbf{R}_i = \mathbf{V}_i$
 - The contextual feature map: $\mathbf{R}_i = \mathbf{H}_i$.
