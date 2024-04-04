@@ -5,7 +5,7 @@ categories: [GraphML, Graph Neural Network]
 ---
 
 ### Abstract
->A gentle introduction into Graph ML
+A gentle introduction into Graph Network and how to use it in Machine Learning
 
 
 ## 1.Introduction to Graph
