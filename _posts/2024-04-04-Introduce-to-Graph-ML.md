@@ -4,7 +4,11 @@ title: Introduce to Graph ML
 categories: [GraphML, Graph Neural Network]
 ---
 
-## 1.[Introduction](http://web.stanford.edu/class/cs224w/slides/01-intro.pdf)<br>
+### Abstract
+>A gentle introduction into Graph ML
+
+
+## 1.Introduction to Graph
 ### Introduce
 - **Graphs** are a general language for describing and analyzing entities with relations/interations
 - Networks are complex:
