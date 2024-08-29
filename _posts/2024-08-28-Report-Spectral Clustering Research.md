@@ -1,4 +1,8 @@
-
+---
+layout: post
+title: Report [2024-08-28] - Spectral Clustering Research
+categories: [SpectralClustering, MetaLearning, Report]
+---
 # Spectral Clustering 
 
 Spectral clustering convert data clustering problems to graph cut problems. 
