@@ -3,8 +3,9 @@ layout: post
 title: Report [2024-08-28] - Spectral Clustering Research
 categories: [SpectralClustering, MetaLearning, Report]
 ---
-# Spectral Clustering 
+# Master thesis report
 
+## I. Spectral Clustering
 Spectral clustering convert data clustering problems to graph cut problems. 
 ### Spectral Clustering steps:
 Given $X = \{x_1, x_2,...x_n\}$ and C cluster class
@@ -50,7 +51,7 @@ $$
 s_{i j}=\frac{d_{i, k+1}-d_{i j}}{k d_{i, k+1}-\sum_{j=1}^k d_{i j}}, j=1, \cdots, k
 $$
 
-# SpectralNet overview
+## II. SpectralNet overview
 
 #### Motivation: 
 Traditional spectral clustering methods have problems of scalability and generalization of the spectral embedding
@@ -73,7 +74,8 @@ $$
 L_{\text {SpectralNet }}(\theta)=\frac{1}{m^2} \sum_{i, j=1}^m W_{i, j}\left\|y_i-y_j\right\|^2
 $$
 with  $m$: samples in a minibatch from distribution $D$
-With the constraint of orthonormal: $$
+With the constraint of orthonormal: 
+$$
 \mathbb{E}\left[y y^T\right]=I_{k \times k}
 $$
 For a minibatch: $\frac{1}{m} Y^T Y=I_{k \times k}, Y \in m \times k$
@@ -96,19 +98,20 @@ for general $k$, under the constraint, the minimum is attained when the column s
 
 #### Building affinity matrix:
 
-- Gaussian kernel: For a set of nearest neighbor pairs: $$
+- Gaussian kernel: For a set of nearest neighbor pairs: 
+$$
 W_{i, j}= \begin{cases}\exp \left(-\frac{\left\|x_i-x_j\right\|^2}{2 \sigma^2}\right), & x_j \text { is among the nearest neighbors of } x_i \\ 0, & \text { otherwise, }\end{cases}
 $$
 - Siamese network: Neuron network trained on a collection of similar (positive) and dissimilar (negative) pairs of data points. By labeling $(x_i, x_j)$ is positive if $|| x_i - x_j||$ is small and negative otherwise 
 	=>  Siamese network, therefore, is trained to learn an adaptive nearest neighbor metric.
 	Siamese network, therefore, is trained to learn an adaptive nearest neighbor metric.
-	$$
+$$
 L_{\text {siamese }}\left(\theta_{\text {siamese }} ; x_i, x_j\right)= \begin{cases}\left\|z_i-z_j\right\|^2, & \left(x_i, x_j\right) \text { is a positive pair } \\ \max \left(c-\left\|z_i-z_j\right\|, 0\right)^2, & \left(x_i, x_j\right) \text { is a negative pair }\end{cases}
 $$
 Objective is to minimize contrastive loss
 After training, the Siamese net is used to define a batch affinity matrix for Spectral Net
 
-# Meta learning overview
+## III. Meta learning overview
 ### Adaptive Meta learning for tuning hyperparameters
 
 Propose Adaptive Learning of hyperparameters for Fast Adaptation that enables training to be more effective with task-conditioned inner-loop updates from any given initialization.
@@ -126,7 +129,8 @@ $$
 the adaptation process via the hyperparameters in the inner-loop update equation, which are scalar constants of **learning rate $\alpha$** and regularization hyperparameter $β = 1 - \alpha\lambda$ 
 
 For task $T_i$ at time step j, The learning state can be defined as $\boldsymbol{\tau}_{i, j}=\left[\nabla_{\boldsymbol{\theta}} \mathcal{L}_{\mathcal{T}_i}^{\mathcal{D}_i}\left(f_{\boldsymbol{\theta}_{i, j}}\right), \boldsymbol{\theta}_{i, j}\right]$
-The proposed meta-learner $g_φ$ generates the adaptive hyperparameters $α_{i,j}$ and $β_{i,j}$ using the current parameters $θ_{i,j}$ and its gradients $∇_θ L^{D_i}_{T_i}$. $$
+The proposed meta-learner $g_φ$ generates the adaptive hyperparameters $α_{i,j}$ and $β_{i,j}$ using the current parameters $θ_{i,j}$ and its gradients $∇_θ L^{D_i}_{T_i}$. 
+$$
 \left(\boldsymbol{\alpha}_{i, j}, \boldsymbol{\beta}_{i, j}\right)=g_{\boldsymbol{\phi}}\left(\boldsymbol{\tau}_{i, j}\right) .
 $$
 For every inner-loop update step, the generator produce the learning rate and regularization hyper-parameters, which they are used to control the direction and magnitude of the weight update.
@@ -150,8 +154,7 @@ where:
 
 All of these terms are repeated to the dimension of $\theta_{i,j}$.
 
-# Meta learning for adapting Gaussian scale 
-
+## IV. Meta learning for adapting Gaussian scale 
 Based on the above methodology, a meta learner is added to the training state.
 - Input: Randomly sample batch from original data distribution 
 - Output: Gaussian scale to create affinity matrix
@@ -160,11 +163,12 @@ Architecture: 3 linear layer with LeakyRelu() activation. The last layer output 
 $$
 	scale = \frac{1}{m}(\sum_{i = 0}^m{F_{meta}(x_i)})
 $$
-## Experiment
+### Experiment
 
 Dataset:
 - Image: MRSC, Caltech-101, MNIST
 - Tabular: prokaryotic
+
 Metric: 
 - **ACC** - accuracy score 
 
@@ -178,19 +182,20 @@ Metric:
 	- H(U) and H(V) are the entropies of U and V respectively: $-\sum_{i=1}^{|U|} (\frac{|U_i|}{N} \log \frac{|U_i|}{N})$
 	
 - **PURITY**:  measures the extent to which each cluster contains data points from primarily one class.
+- To calculate Purity:
+  1. For each cluster, count the number of data points from each class.
+  2. Take the maximum count for each cluster.
+  3. Sum these maximum counts.
+  4. Divide by the total number of data points.
 
 $$Purity = (1/N) * Σ(k) max(n_k^i)$$
-	Where:
-	- N is the total number of data points
-	- k is the number of clusters
-	- n_k^i is the number of data points of class i in cluster k
-	To calculate Purity:
-	1. For each cluster, count the number of data points from each class.
-	2. Take the maximum count for each cluster.
-	3. Sum these maximum counts.
-	4. Divide by the total number of data points.
+Where:
+- N is the total number of data points
+- k is the number of clusters
+- n_k^i is the number of data points of class i in cluster k
 
-## Result
+
+### Result
 
 | Method                                                                              | Dataset     | ACC   | NMI   | PURITY |
 | ----------------------------------------------------------------------------------- | ----------- | ----- | ----- | ------ |
@@ -211,7 +216,7 @@ $$Purity = (1/N) * Σ(k) max(n_k^i)$$
 |                                                                                     | Caltech-101 | 0.121 | 0.272 | 0.464  |
 |                                                                                     | prokaryotic | 0.468 | 0.181 | 0.711  |
 
-# To do:
+## To do:
 - Research multi-view clustering approach
 - Optimize meta learning cluster with better adaptive loss: 
 Tuning K for clustering: https://www.sciencedirect.com/science/article/abs/pii/S0950705120301209
