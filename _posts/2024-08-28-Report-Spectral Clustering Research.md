@@ -115,31 +115,41 @@ After training, the Siamese net is used to define a batch affinity matrix for Sp
 ### Adaptive Meta learning for tuning hyperparameters
 
 Propose Adaptive Learning of hyperparameters for Fast Adaptation that enables training to be more effective with task-conditioned inner-loop updates from any given initialization.
+
 #### Motivation:
+
 Fast adaptation when test task is different from train task 
 Introduce a small meta-network that can adaptively generate per-step hyper-parameters: learning rate and weight decay coefficients.
+
 #### Methodology:
-With a $l2$ regularization added to the loss function, the inner loop update: 
+
+With a $l2$ regularization added to the loss function, the inner loop update:
+
 $$
 \begin{aligned}
 \boldsymbol{\theta}_{i, j+1} & =\boldsymbol{\theta}_{i, j}-\alpha\left(\nabla_{\boldsymbol{\theta}} \mathcal{L}_{\mathcal{T}_i}^{\mathcal{D}_i}\left(f_{\boldsymbol{\theta}_{i, j}}\right)+\lambda \boldsymbol{\theta}_{i, j}\right) \\
 & =\beta \boldsymbol{\theta}_{i, j}-\alpha \nabla_{\boldsymbol{\theta}} \mathcal{L}_{\mathcal{T}_i}^{\mathcal{D}_i}\left(f_{\boldsymbol{\theta}_{i, j}}\right)
 \end{aligned}
 $$
-the adaptation process via the hyperparameters in the inner-loop update equation, which are scalar constants of **learning rate $\alpha$** and regularization hyperparameter $β = 1 - \alpha\lambda$ 
+
+the adaptation process via the hyperparameters in the inner-loop update equation, which are scalar constants of **learning rate $\alpha$** and regularization hyperparameter $β = 1 - \alpha\lambda$
 
 For task $T_i$ at time step j, The learning state can be defined as $\boldsymbol{\tau}_{i, j}=\left[\nabla_{\boldsymbol{\theta}} \mathcal{L}_{\mathcal{T}_i}^{\mathcal{D}_i}\left(f_{\boldsymbol{\theta}_{i, j}}\right), \boldsymbol{\theta}_{i, j}\right]$
 
 The proposed meta-learner $g_φ$ generates the adaptive hyperparameters $α_{i,j}$ and $β_{i,j}$ using the current parameters $θ_{i,j}$ and its gradients $∇_θ L^{D_i}_{T_i}$.
+
 $$
 \left(\boldsymbol{\alpha}_{i, j}, \boldsymbol{\beta}_{i, j}\right)=g_{\boldsymbol{\phi}}\left(\boldsymbol{\tau}_{i, j}\right) .
 $$
+
 For every inner-loop update step, the generator produce the learning rate and regularization hyper-parameters, which they are used to control the direction and magnitude of the weight update.
 
 To train the network $g_\phi$, the outer-loop optimization using new examples $D'_i$ and task-adapted weights $\theta'_i$ is performed as in:
 
 $$\phi \leftarrow \phi - \eta \nabla_\phi \sum_{T_i} L_{D'_i}(f_{\theta'_i})$$
+
 #### Implementing:
+
 Generator network $g_φ$ is a 3-layer MLP with ReLU activation between the layers.
 The task specific learning state is reduce into layer-wise mean of gradients and weights thus resulting in 2 state values per layer.
 
@@ -162,8 +172,9 @@ Based on the above methodology, a meta learner is added to the training state.
 Architecture: 3 linear layer with LeakyRelu() activation. The last layer output return 1 scalar for each image feature. 
 
 $$
-	scale = \frac{1}{m}(\sum_{i = 0}^m{F_{meta}(x_i)})
+scale = \frac{1}{m}(\sum_{i = 0}^m{F_{meta}(x_i)})
 $$
+
 ### Experiment
 
 Dataset:
