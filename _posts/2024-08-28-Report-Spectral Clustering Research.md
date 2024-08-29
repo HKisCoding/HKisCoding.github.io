@@ -129,7 +129,8 @@ $$
 the adaptation process via the hyperparameters in the inner-loop update equation, which are scalar constants of **learning rate $\alpha$** and regularization hyperparameter $β = 1 - \alpha\lambda$ 
 
 For task $T_i$ at time step j, The learning state can be defined as $\boldsymbol{\tau}_{i, j}=\left[\nabla_{\boldsymbol{\theta}} \mathcal{L}_{\mathcal{T}_i}^{\mathcal{D}_i}\left(f_{\boldsymbol{\theta}_{i, j}}\right), \boldsymbol{\theta}_{i, j}\right]$
-The proposed meta-learner $g_φ$ generates the adaptive hyperparameters $α_{i,j}$ and $β_{i,j}$ using the current parameters $θ_{i,j}$ and its gradients $∇_θ L^{D_i}_{T_i}$. 
+
+The proposed meta-learner $g_φ$ generates the adaptive hyperparameters $α_{i,j}$ and $β_{i,j}$ using the current parameters $θ_{i,j}$ and its gradients $∇_θ L^{D_i}_{T_i}$.
 $$
 \left(\boldsymbol{\alpha}_{i, j}, \boldsymbol{\beta}_{i, j}\right)=g_{\boldsymbol{\phi}}\left(\boldsymbol{\tau}_{i, j}\right) .
 $$
@@ -176,13 +177,15 @@ Metric:
 	- 0 indicates no mutual information (completely random clustering)
 	- 1 indicates perfect correlation with the true labels
 	- NMI(U, V) = $\frac{2 * I(U, V)}{H(U) + H(V)}$
-	Where:
-	- U and V are two different clusterings (e.g., predicted clustering and true labels)
-	- I(U, V) is the mutual information between U and V: $I(U, V) = \sum_{i=1}^{|U|} \sum_{j=1}^{|V|} \frac{|U_i \cap V_j|}{N} \log \frac{N|U_i \cap V_j|}{|U_i||V_j|}$
-	- H(U) and H(V) are the entropies of U and V respectively: $-\sum_{i=1}^{|U|} (\frac{|U_i|}{N} \log \frac{|U_i|}{N})$
+
+Where:
+- U and V are two different clusterings (e.g., predicted clustering and true labels)
+- I(U, V) is the mutual information between U and V: $I(U, V) = \sum_{i=1}^{|U|} \sum_{j=1}^{|V|} \frac{|U_i \cap V_j|}{N} \log \frac{N|U_i \cap V_j|}{|U_i||V_j|}$
+- H(U) and H(V) are the entropies of U and V respectively: $-\sum_{i=1}^{|U|} (\frac{|U_i|}{N} \log \frac{|U_i|}{N})$
 	
 - **PURITY**:  measures the extent to which each cluster contains data points from primarily one class.
-- To calculate Purity:
+
+To calculate Purity:
   1. For each cluster, count the number of data points from each class.
   2. Take the maximum count for each cluster.
   3. Sum these maximum counts.
